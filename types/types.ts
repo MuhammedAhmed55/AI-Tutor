@@ -80,7 +80,6 @@ export interface RoleAccess {
 export enum ResourceType {
   // Dashboard
   DASHBOARD = "dashboard",
-  AI_MANAGER = "ai-manager",
   USER_DASHBOARD = "user-dashboard",
   UPLOAD = "upload",
   MCQS = "mcqs",  

@@ -47,10 +47,9 @@ export default function ChatbotPage() {
     scrollToBottom()
   }, [messages])
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       sender: 'user',
@@ -58,31 +57,46 @@ export default function ChatbotPage() {
       timestamp: new Date(),
     }
 
+    // Add user message immediately
     setMessages((prev) => [...prev, userMessage])
     setInputValue('')
     setIsLoading(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponses = [
-        'The cell membrane is a selectively permeable barrier that controls the movement of substances in and out of the cell. It consists of a phospholipid bilayer with embedded proteins that facilitate specific transport mechanisms.',
-        'Photosynthesis is the process by which plants convert light energy into chemical energy stored in glucose. It occurs in two stages: the light-dependent reactions in the thylakoid and the light-independent reactions (Calvin cycle) in the stroma.',
-        'Genetic inheritance follows Mendelian principles. Traits are inherited through genes, which exist in different forms called alleles. Dominant alleles mask recessive ones in heterozygous individuals.',
-        'DNA replication ensures that each daughter cell receives an identical copy of genetic material. It occurs during the S phase of the cell cycle and is semi-conservative, with each strand serving as a template.',
-      ]
+    try {
+      const response = await fetch('/api/geminiChat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
+      })
 
-      const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)]
+      if (!response.ok) {
+        throw new Error('Failed to fetch from API')
+      }
+
+      const data = await response.json()
+      const aiText = data.aiText || 'Sorry, no response'
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'ai',
-        content: randomResponse,
+        content: aiText,
         timestamp: new Date(),
       }
 
       setMessages((prev) => [...prev, aiMessage])
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(),
+        sender: 'ai',
+        content: 'Error: Unable to get response from AI.',
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   return (
@@ -151,8 +165,9 @@ export default function ChatbotPage() {
               placeholder="Ask your question..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               className="bg-input border border-border"
+              disabled={isLoading}
             />
             <Button onClick={handleSendMessage} disabled={isLoading || !inputValue.trim()} className="gap-2">
               <Send className="w-4 h-4" />

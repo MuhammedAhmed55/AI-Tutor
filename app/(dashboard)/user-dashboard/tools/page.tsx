@@ -47,14 +47,6 @@ export default function AIToolsPage() {
       color: 'from-yellow-500/10 to-yellow-500/5',
       href: '/user-dashboard/tools/important-topics',
     },
-    {
-      icon: TrendingUp,
-      title: 'Past Paper Prediction',
-      description: 'Predict likely exam questions based on patterns',
-      features: ['Historical data', 'Accuracy score', 'Study tips'],
-      color: 'from-pink-500/10 to-pink-500/5',
-      href: '/user-dashboard/tools/past-papers',
-    },
   ]
 
   return (

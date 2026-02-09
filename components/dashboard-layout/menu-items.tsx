@@ -12,7 +12,6 @@ import {
   Shield,
   User as UserIcon,
   UserCog,
-  Bot,
   MessageCircle,
   BookOpen,
   Upload,
@@ -83,13 +82,6 @@ export const getNavData = (user: User) => {
       url: "/",
       icon: <LayoutDashboard className="size-4 text-primary" />,
       isActive: false,
-    },
-    {
-      title: "AI Manager",
-      url: "/ai-manager",
-      icon: <Bot className="size-4 text-primary" />,
-      isActive: false,
-      resource: ResourceType.AI_MANAGER,
     },
   ] as unknown as MenuItem[];
 

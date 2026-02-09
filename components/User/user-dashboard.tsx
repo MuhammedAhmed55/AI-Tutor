@@ -97,19 +97,19 @@ export default function userDashboard() {
             <Card className="border border-border p-6 bg-gradient-to-br from-primary/5 to-accent/5">
               <h3 className="font-semibold text-foreground mb-4">Quick Actions</h3>
               <div className="space-y-3">
-                <Link href="/dashboard/upload">
+                <Link href="/user-dashboard/upload">
                   <Button className="w-full gap-2 justify-start" variant="default">
                     <Plus className="w-4 h-4" />
                     Upload Notes
                   </Button>
                 </Link>
-                <Link href="/dashboard/tools">
+                <Link href="/user-dashboard/tools">
                   <Button className="w-full gap-2 justify-start" variant="outline">
                     <Zap className="w-4 h-4" />
                     Generate Summary
                   </Button>
                 </Link>
-                <Link href="/dashboard/study-plan">
+                <Link href="/user-dashboard/study-plan">
                   <Button className="w-full gap-2 justify-start" variant="outline">
                     <BookOpen className="w-4 h-4" />
                     Create Study Plan
