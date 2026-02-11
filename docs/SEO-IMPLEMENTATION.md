@@ -2,7 +2,7 @@
 
 ## Overview
 
-Comprehensive SEO has been implemented across the entire STARTERKIT project following Next.js 15 App Router best practices and industry standards.
+Comprehensive SEO has been implemented across the entire AI-Tutor project following Next.js 15 App Router best practices and industry standards.
 
 ---
 
@@ -110,7 +110,7 @@ import { generatePageSEO } from "@/lib/seo-utils";
 export const metadata: Metadata = generatePageSEO({
   title: "About Us",
   description:
-    "Learn about STARTERKIT's mission to transform businesses through continuous improvement and lean methodologies for sustainable growth.",
+    "Learn about AI-Tutor's mission to transform learning through AI-powered study tools and intelligent content generation for better education.",
   path: "/about",
 });
 
@@ -211,7 +211,7 @@ export default function ProductPage() {
 Create `.env.local` with:
 
 ```env
-NEXT_PUBLIC_APP_URL=https://starterkit.com
+NEXT_PUBLIC_APP_URL=https://ai-tutor.com
 ```
 
 ### Updating Site Configuration

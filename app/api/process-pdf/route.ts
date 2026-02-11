@@ -258,6 +258,7 @@ ${textToProcess}`;
     let mcqQuestions = [];
 
     try {
+      console.log('Starting MCQ generation...');
       const mcqPrompt = `Generate exactly 5 multiple choice questions from the following text. Return ONLY a valid JSON array with this exact structure, no other text:
 [
   {
@@ -279,6 +280,7 @@ Text to generate MCQs from:
 ${textToProcess}`;
 
       const mcqText = await callGemini(mcqPrompt, 2048, 0.8);
+      console.log('MCQ API Response:', mcqText ? mcqText.substring(0, 200) : 'No response');
 
       if (mcqText) {
         const cleanedText = mcqText
@@ -286,8 +288,11 @@ ${textToProcess}`;
           .replace(/```\n?/g, '')
           .trim();
 
+        console.log('Cleaned MCQ text:', cleanedText.substring(0, 300));
+
         try {
           const mcqData = JSON.parse(cleanedText);
+          console.log('Parsed MCQ data:', JSON.stringify(mcqData, null, 2));
 
           if (Array.isArray(mcqData) && mcqData.length > 0) {
             // Calculate difficulty distribution
@@ -298,6 +303,8 @@ ${textToProcess}`;
             
             const dominantDifficulty = Object.entries(difficultyCounts)
               .sort((a: any, b: any) => b[1] - a[1])[0][0];
+
+            console.log('Creating MCQ set with difficulty:', dominantDifficulty);
 
             const { data: set, error: setError } = await supabase
               .from('mcq_sets')
@@ -311,8 +318,13 @@ ${textToProcess}`;
               .select()
               .single();
 
+            if (setError) {
+              console.error('Error creating MCQ set:', setError);
+            }
+
             if (!setError && set) {
               mcqSet = set;
+              console.log('MCQ set created successfully:', set.id);
 
               const questionInserts = mcqData.map((q: any) => ({
                 mcq_set_id: set.id,
@@ -323,20 +335,31 @@ ${textToProcess}`;
                 difficulty: q.difficulty || 'medium',
               }));
 
+              console.log('Inserting questions:', questionInserts.length);
+
               const { data: insertedQuestions, error: questionsError } = await supabase
                 .from('mcq_questions')
                 .insert(questionInserts)
                 .select();
+
+              if (questionsError) {
+                console.error('Error inserting MCQ questions:', questionsError);
+              }
 
               if (!questionsError && insertedQuestions) {
                 mcqQuestions = insertedQuestions;
                 console.log(`Successfully created ${mcqQuestions.length} MCQs`);
               }
             }
+          } else {
+            console.log('MCQ data is not an array or is empty:', mcqData);
           }
         } catch (parseError) {
           console.error('Failed to parse MCQs JSON:', parseError);
+          console.error('Raw text that failed to parse:', cleanedText);
         }
+      } else {
+        console.warn('No MCQ text received from Gemini API');
       }
     } catch (error) {
       console.error('Error generating MCQs:', error);
@@ -347,6 +370,7 @@ ${textToProcess}`;
     let shortQuestions = [];
 
     try {
+      console.log('Starting short questions generation...');
       const shortQPrompt = `Generate exactly 5 short answer questions from the following text suitable for a 5-mark exam question. Return ONLY a valid JSON array with this exact structure, no other text:
 [
   {
@@ -364,7 +388,8 @@ Rules:
 Text to generate short questions from:
 ${textToProcess}`;
 
-      const shortQText = await callGemini(shortQPrompt, 2048, 0.7);
+      const shortQText = await callGemini(shortQPrompt, 4000, 0.7);
+      console.log('Short questions API Response:', shortQText ? shortQText.substring(0, 200) : 'No response');
 
       if (shortQText) {
         const cleanedText = shortQText
@@ -372,10 +397,26 @@ ${textToProcess}`;
           .replace(/```\n?/g, '')
           .trim();
 
+        console.log('Cleaned short questions text:', cleanedText.substring(0, 300));
+
         try {
-          const shortQData = JSON.parse(cleanedText);
+          // Validate JSON is complete by checking it ends with ] or }
+          let jsonText = cleanedText;
+          if (!jsonText.trim().endsWith(']') && !jsonText.trim().endsWith('}')) {
+            console.warn('JSON appears incomplete, attempting to fix...');
+            // Try to find the last complete object and close the array
+            const lastBrace = jsonText.lastIndexOf('}');
+            if (lastBrace > 0) {
+              jsonText = jsonText.substring(0, lastBrace + 1) + ']';
+              console.log('Fixed incomplete JSON');
+            }
+          }
+
+          const shortQData = JSON.parse(jsonText);
+          console.log('Parsed short questions data:', JSON.stringify(shortQData, null, 2));
 
           if (Array.isArray(shortQData) && shortQData.length > 0) {
+            console.log('Creating short question set...');
             const { data: set, error: setError } = await supabase
               .from('short_question_sets')
               .insert({
@@ -387,8 +428,13 @@ ${textToProcess}`;
               .select()
               .single();
 
+            if (setError) {
+              console.error('Error creating short question set:', setError);
+            }
+
             if (!setError && set) {
               shortQuestionSet = set;
+              console.log('Short question set created successfully:', set.id);
 
               const questionInserts = shortQData.map((q: any) => ({
                 set_id: set.id,
@@ -397,20 +443,31 @@ ${textToProcess}`;
                 marks: q.marks || 5,
               }));
 
+              console.log('Inserting short questions:', questionInserts.length);
+
               const { data: insertedQuestions, error: questionsError } = await supabase
                 .from('short_questions')
                 .insert(questionInserts)
                 .select();
+
+              if (questionsError) {
+                console.error('Error inserting short questions:', questionsError);
+              }
 
               if (!questionsError && insertedQuestions) {
                 shortQuestions = insertedQuestions;
                 console.log(`Successfully created ${shortQuestions.length} short questions`);
               }
             }
+          } else {
+            console.log('Short questions data is not an array or is empty:', shortQData);
           }
         } catch (parseError) {
           console.error('Failed to parse short questions JSON:', parseError);
+          console.error('Raw text that failed to parse:', cleanedText);
         }
+      } else {
+        console.warn('No short questions text received from Gemini API');
       }
     } catch (error) {
       console.error('Error generating short questions:', error);
@@ -420,6 +477,7 @@ ${textToProcess}`;
     let importantTopics = [];
 
     try {
+      console.log('Starting important topics generation...');
       const topicsPrompt = `Extract the 5 most important topics from the following text. Return ONLY a valid JSON array with this exact structure, no other text:
 [
   {
@@ -439,7 +497,8 @@ Rules:
 Text to extract important topics from:
 ${textToProcess}`;
 
-      const topicsText = await callGemini(topicsPrompt, 2048, 0.6);
+      const topicsText = await callGemini(topicsPrompt, 4000, 0.6);
+      console.log('Important topics API Response:', topicsText ? topicsText.substring(0, 200) : 'No response');
 
       if (topicsText) {
         const cleanedText = topicsText
@@ -447,10 +506,26 @@ ${textToProcess}`;
           .replace(/```\n?/g, '')
           .trim();
 
+        console.log('Cleaned important topics text:', cleanedText.substring(0, 300));
+
         try {
-          const topicsData = JSON.parse(cleanedText);
+          // Validate JSON is complete by checking it ends with ] or }
+          let jsonText = cleanedText;
+          if (!jsonText.trim().endsWith(']') && !jsonText.trim().endsWith('}')) {
+            console.warn('JSON appears incomplete, attempting to fix...');
+            // Try to find the last complete object and close the array
+            const lastBrace = jsonText.lastIndexOf('}');
+            if (lastBrace > 0) {
+              jsonText = jsonText.substring(0, lastBrace + 1) + ']';
+              console.log('Fixed incomplete JSON');
+            }
+          }
+
+          const topicsData = JSON.parse(jsonText);
+          console.log('Parsed important topics data:', JSON.stringify(topicsData, null, 2));
 
           if (Array.isArray(topicsData) && topicsData.length > 0) {
+            console.log('Preparing to insert', topicsData.length, 'important topics...');
             const topicInserts = topicsData.map((t: any) => ({
               user_id: userId,
               pdf_note_id: pdfNoteId,
@@ -466,16 +541,23 @@ ${textToProcess}`;
               .insert(topicInserts)
               .select();
 
+            if (topicsError) {
+              console.error('Error inserting important topics:', topicsError);
+            }
+
             if (!topicsError && insertedTopics) {
               importantTopics = insertedTopics;
               console.log(`Successfully created ${importantTopics.length} important topics`);
-            } else {
-              console.error('Error inserting important topics:', topicsError);
             }
+          } else {
+            console.log('Important topics data is not an array or is empty:', topicsData);
           }
         } catch (parseError) {
           console.error('Failed to parse important topics JSON:', parseError);
+          console.error('Raw text that failed to parse:', cleanedText);
         }
+      } else {
+        console.warn('No important topics text received from Gemini API');
       }
     } catch (error) {
       console.error('Error generating important topics:', error);

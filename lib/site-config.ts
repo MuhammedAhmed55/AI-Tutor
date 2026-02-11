@@ -6,17 +6,17 @@ import type { Metadata } from "next";
  */
 
 export const siteConfig = {
-  name: "STARTERKIT",
+  name: "AI-Tutor",
   description:
-    "Transform your business with continuous improvement strategies. STARTERKIT helps teams implement lean methodologies for sustainable growth.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://starterkit.com",
+    "Transform your learning with AI-powered study tools. AI-Tutor helps students master concepts through intelligent MCQ tests, short questions, and important topics extraction.",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://ai-tutor.com",
   ogImage: "/og-image.jpg",
   links: {
     twitter: "https://twitter.com/kaizenkatalyst",
-    github: "https://github.com/yourusername/starterkit",
+    github: "https://github.com/yourusername/ai-tutor",
   },
   creator: {
-    name: "STARTERKIT Team",
+    name: "AI-Tutor Team",
     twitter: "@kaizenkatalyst",
   },
   keywords: [

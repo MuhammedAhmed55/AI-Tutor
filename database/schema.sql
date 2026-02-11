@@ -320,56 +320,56 @@
 -- CREATE INDEX idx_ai_summaries_user_id ON public.ai_summaries(user_id);
 -- CREATE INDEX idx_ai_summaries_pdf_note_id ON public.ai_summaries(pdf_note_id);
 
--- -- ============================================
--- -- 3. MCQ GENERATOR
--- -- ============================================
+-- ============================================
+-- 3. MCQ GENERATOR
+-- ============================================
 
--- CREATE TABLE public.mcq_sets (
---   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
---   user_id UUID NOT NULL,
---   pdf_note_id UUID NOT NULL,
---   title TEXT NOT NULL,
---   difficulty_level TEXT DEFAULT 'medium', -- easy, medium, hard
---   total_questions INTEGER NOT NULL,
---   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---   CONSTRAINT mcq_sets_user_id_fkey FOREIGN KEY (user_id) 
---     REFERENCES public.user_profile(id) ON DELETE CASCADE,
---   CONSTRAINT mcq_sets_pdf_note_id_fkey FOREIGN KEY (pdf_note_id) 
---     REFERENCES public.pdf_notes(id) ON DELETE CASCADE
--- );
+CREATE TABLE public.mcq_sets (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
+  pdf_note_id UUID NOT NULL,
+  title TEXT NOT NULL,
+  difficulty_level TEXT DEFAULT 'medium', -- easy, medium, hard
+  total_questions INTEGER NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT mcq_sets_user_id_fkey FOREIGN KEY (user_id) 
+    REFERENCES public.user_profile(id) ON DELETE CASCADE,
+  CONSTRAINT mcq_sets_pdf_note_id_fkey FOREIGN KEY (pdf_note_id) 
+    REFERENCES public.pdf_notes(id) ON DELETE CASCADE
+);
 
--- CREATE TABLE public.mcq_questions (
---   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
---   mcq_set_id UUID NOT NULL,
---   question_text TEXT NOT NULL,
---   options JSONB NOT NULL, -- ["option1", "option2", "option3", "option4"]
---   correct_answer INTEGER NOT NULL, -- index of correct option (0-3)
---   explanation TEXT,
---   difficulty TEXT DEFAULT 'medium',
---   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---   CONSTRAINT mcq_questions_mcq_set_id_fkey FOREIGN KEY (mcq_set_id) 
---     REFERENCES public.mcq_sets(id) ON DELETE CASCADE
--- );
+CREATE TABLE public.mcq_questions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  mcq_set_id UUID NOT NULL,
+  question_text TEXT NOT NULL,
+  options JSONB NOT NULL, -- ["option1", "option2", "option3", "option4"]
+  correct_answer INTEGER NOT NULL, -- index of correct option (0-3)
+  explanation TEXT,
+  difficulty TEXT DEFAULT 'medium',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT mcq_questions_mcq_set_id_fkey FOREIGN KEY (mcq_set_id) 
+    REFERENCES public.mcq_sets(id) ON DELETE CASCADE
+);
 
--- -- Track user's MCQ attempts
--- CREATE TABLE public.mcq_attempts (
---   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
---   user_id UUID NOT NULL,
---   mcq_set_id UUID NOT NULL,
---   score INTEGER NOT NULL, -- out of total_questions
---   time_taken_seconds INTEGER,
---   answers JSONB NOT NULL, -- {question_id: selected_option}
---   completed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---   CONSTRAINT mcq_attempts_user_id_fkey FOREIGN KEY (user_id) 
---     REFERENCES public.user_profile(id) ON DELETE CASCADE,
---   CONSTRAINT mcq_attempts_mcq_set_id_fkey FOREIGN KEY (mcq_set_id) 
---     REFERENCES public.mcq_sets(id) ON DELETE CASCADE
--- );
+-- Track user's MCQ attempts
+CREATE TABLE public.mcq_attempts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
+  mcq_set_id UUID NOT NULL,
+  score INTEGER NOT NULL, -- out of total_questions
+  time_taken_seconds INTEGER,
+  answers JSONB NOT NULL, -- {question_id: selected_option}
+  completed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT mcq_attempts_user_id_fkey FOREIGN KEY (user_id) 
+    REFERENCES public.user_profile(id) ON DELETE CASCADE,
+  CONSTRAINT mcq_attempts_mcq_set_id_fkey FOREIGN KEY (mcq_set_id) 
+    REFERENCES public.mcq_sets(id) ON DELETE CASCADE
+);
 
--- CREATE INDEX idx_mcq_sets_user_id ON public.mcq_sets(user_id);
--- CREATE INDEX idx_mcq_questions_set_id ON public.mcq_questions(mcq_set_id);
--- CREATE INDEX idx_mcq_attempts_user_id ON public.mcq_attempts(user_id);
+CREATE INDEX idx_mcq_sets_user_id ON public.mcq_sets(user_id);
+CREATE INDEX idx_mcq_questions_set_id ON public.mcq_questions(mcq_set_id);
+CREATE INDEX idx_mcq_attempts_user_id ON public.mcq_attempts(user_id);
 
 -- -- ============================================
 -- -- 4. FLASHCARDS

@@ -4,7 +4,7 @@ import RoleManagementPage from "@/components/dashboard/roles";
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";
 const title = "Roles | Access Management";
 const description =
-  "Define and manage user roles and their permissions in the Kaizen starterkit dashboard.";
+  "Define and manage user roles and their permissions in the AI-Tutor dashboard.";
 
 export const metadata: Metadata = {
   title,

@@ -134,7 +134,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 >
                   <Link href="/">
                     <LogoSvg className="[&_rect]:fill-sidebar [&_rect:first-child]:fill-primary" />
-                    <span className="text-xl font-semibold">STARTERKIT</span>
+                    <span className="text-xl font-semibold">AI-Tutor</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

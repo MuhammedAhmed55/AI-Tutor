@@ -90,7 +90,7 @@ const Login2 = () => {
             <div>
               <h2 className="mb-1.5 text-2xl font-semibold">Welcome back! </h2>
               <p className="text-muted-foreground">
-                Please sign in to your STARTERKIT account
+                Please sign in to your AI-Tutor account
               </p>
             </div>
 

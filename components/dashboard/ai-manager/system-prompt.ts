@@ -1,5 +1,5 @@
 export const systemPrompt = `
-You are a helpful AI assistant for this starter kit application.
+You are a helpful AI assistant for the AI-Tutor application.
 
 Your responsibilities:
 - Provide clear, helpful responses to user questions

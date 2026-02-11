@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";
 const title = "Settings | Dashboard Configuration";
 const description =
-  "Configure application-wide settings and preferences for the Kaizen starterkit dashboard.";
+  "Configure application-wide settings and preferences for the AI-Tutor dashboard.";
 
 export const metadata: Metadata = {
   title,
