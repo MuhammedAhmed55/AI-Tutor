@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Upload, FileText, CheckCircle, Loader2 } from "lucide-react";
 import { useState, useContext } from "react";
+import { toast } from "sonner";
 
 import { createPdfNote } from "@/lib/supabase/actions/createPdfNote";
 import { AuthContext } from "@/context/AuthContext";
@@ -37,9 +38,15 @@ export default function UploadPage() {
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || "Upload failed");
+      if (!res.ok) {
+        toast.error(`Upload failed: ${data.error || "Unknown error"}`);
+        throw new Error(data.error || "Upload failed");
+      }
 
-      if (!userId) throw new Error("User not authenticated");
+      if (!userId) {
+        toast.error("User not authenticated");
+        throw new Error("User not authenticated");
+      }
 
       const pdfNote = await createPdfNote({
         userId,
@@ -57,8 +64,10 @@ export default function UploadPage() {
           progress: 100,
         },
       ]);
+
+      toast.success(`✅ ${data.name} uploaded successfully`);
     } catch (err: any) {
-      alert(err.message);
+      console.error(err);
     } finally {
       setUploading(false);
     }
@@ -66,7 +75,7 @@ export default function UploadPage() {
 
   const handleProcessWithAI = async () => {
     if (uploadedFiles.length === 0) {
-      alert("No files to process");
+      toast.error("No files to process");
       return;
     }
 
@@ -87,16 +96,20 @@ export default function UploadPage() {
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) {
+        toast.error(`Processing failed: ${data.error}`);
+        throw new Error(data.error);
+      }
 
-      alert(
-        `✅ Processing complete!\n\n${data.summaries?.length || 0} summaries created\n${data.flashcards?.length || 0} flashcards created`
+      toast.success(
+        `✨ Your AI request processed successfully!\n\n📝 ${data.summaries?.length || 0} summaries created\n🎴 ${data.flashcards?.length || 0} flashcards created\n❓ ${data.short_questions?.length || 0} questions created`,
+        {
+          duration: 5000,
+        }
       );
-
-      // Optional: Clear uploaded files after processing
-      // setUploadedFiles([]);
     } catch (err: any) {
-      alert("Error: " + err.message);
+      console.error(err);
+      toast.error(`Error: ${err.message}`);
     } finally {
       setProcessing(false);
     }

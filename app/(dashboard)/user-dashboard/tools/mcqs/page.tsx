@@ -264,14 +264,7 @@ export default function MCQPage() {
                 )}
                 {regenerating ? 'Regenerating...' : 'Regenerate'}
               </Button>
-              <Button 
-                className="gap-2"
-                onClick={handleExport}
-                disabled={mcqs.length === 0}
-              >
-                <Download className="w-4 h-4" />
-                Export JSON
-              </Button>
+
             </div>
           </div>
 

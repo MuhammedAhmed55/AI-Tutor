@@ -2,7 +2,7 @@
 
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight, Download, RotateCcw, Repeat2, Loader2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Download, RotateCcw, Repeat2, Loader2, Trash2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/supabase-auth-client'
 
@@ -110,6 +110,34 @@ export default function FlashcardsPage() {
   const handleDeckSelect = (deckId: string) => {
     setSelectedDeck(deckId)
     loadFlashcards(deckId)
+  }
+
+  const deleteFlashcard = async (cardId: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!window.confirm('Are you sure you want to delete this flashcard?')) {
+      return
+    }
+    
+    try {
+      const supabaseClient = supabase()
+      const { error } = await supabaseClient
+        .from('flashcards')
+        .delete()
+        .eq('id', cardId)
+      
+      if (error) {
+        setError('Failed to delete flashcard')
+        console.error(error)
+      } else {
+        setFlashcards(flashcards.filter(card => card.id !== cardId))
+        if (currentCard >= flashcards.length - 1 && currentCard > 0) {
+          setCurrentCard(currentCard - 1)
+        }
+      }
+    } catch (err) {
+      setError('An error occurred while deleting the flashcard')
+      console.error(err)
+    }
   }
 
   if (loading && flashcards.length === 0) {
@@ -249,21 +277,6 @@ export default function FlashcardsPage() {
                 <ChevronLeft className="w-6 h-6" />
               </Button>
 
-              <div className="space-y-4 text-center">
-                <Button variant="outline" className="gap-2">
-                  <Repeat2 className="w-4 h-4" />
-                  Mark for Review
-                </Button>
-                <div className="flex gap-2 justify-center">
-                  <Button size="sm" variant="ghost">
-                    I Know
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    Still Learning
-                  </Button>
-                </div>
-              </div>
-
               <Button onClick={nextCard} variant="outline" size="icon" className="h-12 w-12">
                 <ChevronRight className="w-6 h-6" />
               </Button>
@@ -286,8 +299,20 @@ export default function FlashcardsPage() {
                       setIsFlipped(false)
                     }}
                   >
-                    <p className="text-xs font-medium text-muted-foreground mb-2">Q{idx + 1}</p>
-                    <p className="text-sm font-medium text-foreground line-clamp-2">{card.front_text}</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <p className="text-xs font-medium text-muted-foreground mb-2">Q{idx + 1}</p>
+                        <p className="text-sm font-medium text-foreground line-clamp-2">{card.front_text}</p>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+                        onClick={(e) => deleteFlashcard(card.id, e)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </Card>
                 ))}
               </div>
