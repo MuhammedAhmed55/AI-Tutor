@@ -42,61 +42,69 @@ A cutting-edge AI-powered tutoring platform built with **Next.js 16**, **React 1
 
 ---
 
-## 📸 Preview
+## 📸 Screenshots & Preview
 
-### Authentication Interface
+Experience the AI Tutor platform through our comprehensive interface preview:
 
-![Login Screen](images/Screenshot%202026-02-09%20172644.png)
+---
 
-### Dashboard Overview
+#### 🔐 **Authentication & Access**
 
-![Dashboard View](images/Screenshot%202026-02-09%20172703.png)
+| Login Interface | User Registration |
+|---|---|
+| ![Login Screen](./images/Screenshot%202026-02-09%20172644.png) | ![Dashboard View](./images/Screenshot%202026-02-09%20172703.png) |
 
-### User Management System
+---
 
-![User Management](images/Screenshot%202026-02-09%20172717.png)
+#### 👥 **User & Permission Management**
 
-### Role & Permissions Management
+| User Management | Role & Permissions |
+|---|---|
+| ![User Management](./images/Screenshot%202026-02-09%20172717.png) | ![Permissions Interface](./images/Screenshot%202026-02-09%20172733.png) |
 
-![Permissions Interface](images/Screenshot%202026-02-09%20172733.png)
+---
 
-### AI Chat Interface
+#### 💬 **AI Chat & Learning**
 
-![AI Chat](images/Screenshot%202026-02-09%20190025.png)
+| AI Chat Interface | Settings & Customization |
+|---|---|
+| ![AI Chat](./images/Screenshot%202026-02-09%20190025.png) | ![Settings](./images/Screenshot%202026-02-09%20190049.png) |
 
-### Settings Panel
+---
 
-![Settings](images/Screenshot%202026-02-09%20190049.png)
+#### 📊 **Dashboard & Analytics**
 
-### Advanced Dashboard Features
+| Advanced Dashboard | Analytics & Insights |
+|---|---|
+| ![Advanced Features](./images/Screenshot%202026-02-09%20190103.png) | ![Analytics](./images/Screenshot%202026-02-09%20190131.png) |
 
-![Advanced Features](images/Screenshot%202026-02-09%20190103.png)
+---
 
-### Analytics & Insights
+#### 📚 **Content & Profile Management**
 
-![Analytics](images/Screenshot%202026-02-09%20190131.png)
+| Content Management | User Profile |
+|---|---|
+| ![Content Management](./images/Screenshot%202026-02-09%20190150.png) | ![Profile](./images/Screenshot%202026-02-09%20190335.png) |
 
-### Content Management
+---
 
-![Content Management](images/Screenshot%202026-02-09%20190150.png)
+#### ✨ **Latest Interface Updates**
 
-### Profile Management
+<div align="center">
 
-![Profile](images/Screenshot%202026-02-09%20190335.png)
+![Latest Update 1](./images/Screenshot%202026-03-10%20130855.png)
 
-### Latest Interface Updates
+![Latest Update 2](./images/Screenshot%202026-03-10%20131108.png)
 
-![Latest Update 1](images/Screenshot%202026-03-10%20130855.png)
+![Latest Update 3](./images/Screenshot%202026-03-10%20131232.png)
 
-![Latest Update 2](images/Screenshot%202026-03-10%20131108.png)
+![Latest Update 4](./images/Screenshot%202026-03-10%20131324.png)
 
-![Latest Update 3](images/Screenshot%202026-03-10%20131232.png)
+![Latest Update 5](./images/Screenshot%202026-03-10%20131415.png)
 
-![Latest Update 4](images/Screenshot%202026-03-10%20131324.png)
+![Latest Update 6](./images/Screenshot%202026-03-10%20131822.png)
 
-![Latest Update 5](images/Screenshot%202026-03-10%20131415.png)
-
-![Latest Update 6](images/Screenshot%202026-03-10%20131822.png)
+</div>
 
 ---
 
@@ -361,6 +369,6 @@ For issues, questions, or feature requests, please open an issue on GitHub or co
 ---
 
 **Built with ❤️ using Next.js and AI**
-#   A I - T u t o r 
+
  
  
