@@ -48,63 +48,63 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 ---
 
-#### 🔐 **Authentication & Access**
+#### 🔐 **Authentication & Access Control**
 
-| Login Interface | User Registration |
-|---|---|
-| ![Login Screen](./images/Screenshot%202026-02-09%20172644.png) | ![Dashboard View](./images/Screenshot%202026-02-09%20172703.png) |
-
----
-
-#### 👥 **User & Permission Management**
-
-| User Management | Role & Permissions |
-|---|---|
-| ![User Management](./images/Screenshot%202026-02-09%20172717.png) | ![Permissions Interface](./images/Screenshot%202026-02-09%20172733.png) |
+| Login Interface                    | Permissions Management                   |
+| ---------------------------------- | ---------------------------------------- |
+| ![Login Screen](./images/auth.png) | ![Permissions](./images/permissions.png) |
 
 ---
 
-#### 💬 **AI Chat & Learning**
+#### 👥 **User Management System**
 
-| AI Chat Interface | Settings & Customization |
-|---|---|
-| ![AI Chat](./images/Screenshot%202026-02-09%20190025.png) | ![Settings](./images/Screenshot%202026-02-09%20190049.png) |
-
----
-
-#### 📊 **Dashboard & Analytics**
-
-| Advanced Dashboard | Analytics & Insights |
-|---|---|
-| ![Advanced Features](./images/Screenshot%202026-02-09%20190103.png) | ![Analytics](./images/Screenshot%202026-02-09%20190131.png) |
+| Users Overview                   | Update User                             |
+| -------------------------------- | --------------------------------------- |
+| ![User List](./images/users.png) | ![Update User](./images/updateUSer.png) |
 
 ---
 
-#### 📚 **Content & Profile Management**
+#### 📊 **Dashboard & Overview**
 
-| Content Management | User Profile |
-|---|---|
-| ![Content Management](./images/Screenshot%202026-02-09%20190150.png) | ![Profile](./images/Screenshot%202026-02-09%20190335.png) |
+| Dashboard User View                      | User Settings                              |
+| ---------------------------------------- | ------------------------------------------ |
+| ![Dashboard](./images/dashboarduser.png) | ![User Settings](./images/usersetting.png) |
 
 ---
 
-#### ✨ **Latest Interface Updates**
+#### 💬 **AI Chatbot & Learning Tools**
 
-<div align="center">
+| AI Chatbot Interface             | AI Tools Suite                    |
+| -------------------------------- | --------------------------------- |
+| ![Chatbot](./images/chatbot.png) | ![AI Tools](./images/AITools.png) |
 
-![Latest Update 1](./images/Screenshot%202026-03-10%20130855.png)
+---
 
-![Latest Update 2](./images/Screenshot%202026-03-10%20131108.png)
+#### 📚 **Flashcard & Content Management**
 
-![Latest Update 3](./images/Screenshot%202026-03-10%20131232.png)
+| Flashcards Overview                    | Flashcard Answers                                  |
+| -------------------------------------- | -------------------------------------------------- |
+| ![Flashcards](./images/flashcards.png) | ![Flashcard Answers](./images/flashcardanswer.png) |
 
-![Latest Update 4](./images/Screenshot%202026-03-10%20131324.png)
+| Next Generation Flashcards                    | Summary Creation                                   |
+| --------------------------------------------- | -------------------------------------------------- |
+| ![Flashcards 1.0](./images/flashcards1.0.png) | ![Summary Creation](./images/summary_creation.png) |
 
-![Latest Update 5](./images/Screenshot%202026-03-10%20131415.png)
+---
 
-![Latest Update 6](./images/Screenshot%202026-03-10%20131822.png)
+#### 📝 **Study & Content Tools**
 
-</div>
+| Upload Notes                               | Study Schedule                                |
+| ------------------------------------------ | --------------------------------------------- |
+| ![Upload Notes](./images/upload_notes.png) | ![Study Schedule](./images/studyschedule.png) |
+
+---
+
+#### ⚙️ **Settings & Configuration**
+
+| Settings Panel                     | Advanced Settings                                     |
+| ---------------------------------- | ----------------------------------------------------- |
+| ![Settings](./images/settings.png) | ![Advanced Settings](./images/advance%20settings.png) |
 
 ---
 
