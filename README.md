@@ -52,7 +52,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Login Interface                    | Permissions Management                   |
 | ---------------------------------- | ---------------------------------------- |
-| ![Login Screen](./images/auth.png) | ![Permissions](./images/permissions.png) |
+| ![Login Screen](images/auth.png) | ![Permissions](images/permissions.png) |
 
 ---
 
@@ -60,7 +60,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Users Overview                   | Update User                             |
 | -------------------------------- | --------------------------------------- |
-| ![User List](./images/users.png) | ![Update User](./images/updateUSer.png) |
+| ![User List](images/users.png) | ![Update User](images/updateUSer.png) |
 
 ---
 
@@ -68,7 +68,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Dashboard User View                      | User Settings                              |
 | ---------------------------------------- | ------------------------------------------ |
-| ![Dashboard](./images/dashboarduser.png) | ![User Settings](./images/usersetting.png) |
+| ![Dashboard](images/dashboarduser.png) | ![User Settings](images/usersetting.png) |
 
 ---
 
@@ -76,7 +76,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | AI Chatbot Interface             | AI Tools Suite                    |
 | -------------------------------- | --------------------------------- |
-| ![Chatbot](./images/chatbot.png) | ![AI Tools](./images/AITools.png) |
+| ![Chatbot](images/chatbot.png) | ![AI Tools](images/AITools.png) |
 
 ---
 
@@ -84,11 +84,11 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Flashcards Overview                    | Flashcard Answers                                  |
 | -------------------------------------- | -------------------------------------------------- |
-| ![Flashcards](./images/flashcards.png) | ![Flashcard Answers](./images/flashcardanswer.png) |
+| ![Flashcards](images/flashcards.png) | ![Flashcard Answers](images/flashcardanswer.png) |
 
 | Next Generation Flashcards                    | Summary Creation                                   |
 | --------------------------------------------- | -------------------------------------------------- |
-| ![Flashcards 1.0](./images/flashcards1.0.png) | ![Summary Creation](./images/summary_creation.png) |
+| ![Flashcards 1.0](images/flashcards1.0.png) | ![Summary Creation](images/summary_creation.png) |
 
 ---
 
@@ -96,7 +96,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Upload Notes                               | Study Schedule                                |
 | ------------------------------------------ | --------------------------------------------- |
-| ![Upload Notes](./images/upload_notes.png) | ![Study Schedule](./images/studyschedule.png) |
+| ![Upload Notes](images/upload_notes.png) | ![Study Schedule](images/studyschedule.png) |
 
 ---
 
@@ -104,7 +104,7 @@ Experience the AI Tutor platform through our comprehensive interface preview:
 
 | Settings Panel                     | Advanced Settings                                     |
 | ---------------------------------- | ----------------------------------------------------- |
-| ![Settings](./images/settings.png) | ![Advanced Settings](./images/advance%20settings.png) |
+| ![Settings](images/settings.png) | ![Advanced Settings](images/advance%20settings.png) |
 
 ---
 
