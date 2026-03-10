@@ -51,7 +51,7 @@ A cutting-edge AI-powered tutoring platform built with **Next.js 16**, **React 1
 
 | Users Overview | Update User |
 |---|---|
-| ![User List](images/users.png) | ![Update User](images/updateUser.png) |
+| ![User List](images/users.png) | ![Update User](images/updateUSer.png) |
 
 ---
 
